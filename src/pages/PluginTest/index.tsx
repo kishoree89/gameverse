@@ -22,6 +22,13 @@ const SWATCHES = [
   ['Orange', '#fb8c00'], ['Purple', '#8e24aa'], ['Cyan', '#00acc1'], ['Pink', '#d81b60'],
 ];
 
+const SONGS = [
+  ['Test tone', '/media/test-tone.wav'],
+  ['Arcade theme', '/media/song-arcade.wav'],
+  ['Chill lobby', '/media/song-chill.wav'],
+  ['Boss battle', '/media/song-boss.wav'],
+];
+
 export default function PluginTest() {
   return (
     <>
@@ -123,8 +130,15 @@ export default function PluginTest() {
           </Block>
 
           <Block id="media" title="Sound & video" tests="Stop Sounds (Mute), Pause Animations">
-            <p className="mb-3">Press play on the tone, then turn on <em>Stop Sounds</em> in the widget.</p>
-            <audio controls loop src="/media/test-tone.wav" className="w-full max-w-md">Your browser does not support audio.</audio>
+            <p className="mb-3">Press play on several tracks at once, then turn on <em>Stop Sounds</em> in the widget — every track should go silent.</p>
+            <ul className="grid gap-3">
+              {SONGS.map(([title, src]) => (
+                <li key={src}>
+                  <p className="mb-1 text-sm text-white">{title}</p>
+                  <audio controls loop src={src} aria-label={title} className="w-full max-w-md">Your browser does not support audio.</audio>
+                </li>
+              ))}
+            </ul>
             <video controls loop muted={false} playsInline className="mt-5 w-full max-w-md rounded-xl"
               src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm">
               Your browser does not support video.
